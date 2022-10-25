@@ -1,0 +1,11 @@
+id;value;rollover_value;credit_sale;manual_counter;manual_multiplier;decimals_manual_counter;counter_code_id;id_device_id
+1;92684;2358;16185;false;36565;false;1;1
+2;96623;20994;62399;true;36700;false;2;2
+3;63031;87034;93586;false;73757;true;3;3
+4;18350;71072;82237;true;58982;false;4;4
+5;43200;60832;95059;false;51801;true;5;5
+6;45593;84735;75991;true;96233;true;6;6
+7;63193;94947;73475;true;32183;false;7;7
+8;29658;21233;63771;false;2102;false;8;8
+9;91556;52312;15079;true;5157;false;9;9
+10;30158;32063;37696;true;72431;true;10;10

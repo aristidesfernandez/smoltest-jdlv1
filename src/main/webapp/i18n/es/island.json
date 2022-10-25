@@ -1,0 +1,25 @@
+{
+  "smolPlusTempApp": {
+    "island": {
+      "home": {
+        "title": "Islands",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Island",
+        "createOrEditLabel": "Crear o editar Island",
+        "notFound": "Ningún Islands encontrado"
+      },
+      "created": "Un nuevo Island ha sido creado con el identificador {{ param }}",
+      "updated": "Un Island ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Island ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Island {{ id }}?"
+      },
+      "detail": {
+        "title": "Island"
+      },
+      "id": "Id",
+      "description": "Description",
+      "name": "Name"
+    }
+  }
+}
