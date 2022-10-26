@@ -1,0 +1,28 @@
+{
+  "applications": ["smolPlusTemp"],
+  "changelogDate": "20210927195320",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "island",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Island",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

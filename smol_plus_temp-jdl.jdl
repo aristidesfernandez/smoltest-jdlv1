@@ -1,0 +1,276 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName smolPlusTemp
+    blueprints []
+    buildTool gradle
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme sketchy
+    clientThemeVariant dark
+    creationTimestamp 1632771860714
+    databaseType sql
+    devDatabaseType h2Disk
+    dtoSuffix DTO
+    enableGradleEnterprise false
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    gradleEnterpriseHost ""
+    jhiPrefix jhi
+    jhipsterVersion "7.9.3"
+    jwtSecretKey "NDViZGU0ZGQyMTY3YzEyNzY0MWNjMDVmM2E5MzE2MGM1Y2ViMmVhYzZiNzM4YzI4OWViOGQyZjFjNDg1OTFmNjRiOWIxMzE3NGRjNjUxMWI5ZDhkMDQzMTE3M2UzNDM5MTgzZGVjNGUzODY5NmFmZjA4ZjU0Yjc2ZTFhMTMxYTk="
+    languages [es, en]
+    messageBroker false
+    nativeLanguage es
+    otherModules []
+    packageName co.com.ies.smol
+    prodDatabaseType postgresql
+    reactive false
+    searchEngine false
+    serverPort 8080
+    serviceDiscoveryType no
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks [gatling, cucumber]
+    websocket spring-websocket
+    withAdminUi true
+  }
+
+entities EventType, Establishment, EventDevice, DeviceEstablishment, CounterType, CounterEvent, DeviceType, DeviceCategory, Island, CurrencyType, Device,
+  CounterDevice, Manufacturer, Formula, Model, Interfacing, Operator, OperationalPropertiesEstablishment
+}
+
+entity EventType {
+  id Long	
+  eventCode String required
+  sasCode String  
+  description String 
+  isStorable Boolean 
+  isPriority Boolean 
+  procesador String  
+  isAlarm Boolean  	
+}
+
+entity Establishment {
+  id Long
+  liquidationTime ZonedDateTime
+  name String 
+  type EstablishmentType
+  municipalityCode String   
+  neighborhood String 
+  address String 
+  coljuegosCode String 
+  closeTime	ZonedDateTime
+  startTime	ZonedDateTime
+  activityType String 
+  longitude Float
+  latitude Float 
+  mercantileRegistration String
+}
+
+entity EventDevice {
+  id UUID
+  createdAt ZonedDateTime 
+  theoreticalPercentage Boolean 
+  moneyDenomination Double 	
+}
+
+entity DeviceEstablishment {
+  id UUID	
+  registrationAt ZonedDateTime required
+  serial String required
+  departureAt ZonedDateTime 
+  deviceNumber Integer 
+  consecutiveDevice Integer
+  negativeAward Float 
+}
+
+entity CounterType { 
+  @Id counterCode String 
+  name String 
+  description String 
+  includedInFormula Boolean
+  prize Boolean 
+  category String 
+  udteWaitTime Integer 
+}
+
+entity CounterEvent {
+  id UUID
+  valueCounter Long
+  denominationSale Float 	
+}
+
+entity DeviceType {
+  id Long
+  description String 
+  name String
+}
+
+entity DeviceCategory {
+  id Long
+  description String 
+  name String
+}
+
+entity Island {
+  id Long 
+  description String
+  name String
+}
+
+entity CurrencyType {
+  id Long  
+  description String
+  name String
+  isPriority Boolean
+  location String
+  exchangeRate Float
+}
+
+entity Device {
+  id UUID
+  serial String required 
+  isProtocolEsdcs Boolean
+  numberPlayedReport Integer
+  sasDenomination BigDecimal
+  isMultigame Boolean
+  isMultiDenomination Boolean
+  isRetanqueo Boolean
+  state String 
+  theoreticalHold BigDecimal
+  sasIdentifier Integer
+  creditLimit Long
+  hasHooper Boolean
+  coljuegosCode String
+  fabricationDate LocalDate
+  currentToken BigDecimal
+  denominationTito BigDecimal
+  endLostCommunication ZonedDateTime
+  startLostCommunication ZonedDateTime
+  reportMultiplier BigDecimal
+  nuid String
+  payManualPrize Boolean
+  manualHandpay Boolean
+  manualJackpot Boolean
+  manualGameEvent Boolean
+  betCode String
+  homologationIndicator Boolean 
+  coljuegosModel String
+  reportable Boolean
+  aftDenomination BigDecimal
+  lastUpdateDate ZonedDateTime
+  enableRollover Boolean
+  lastCorruptionDate ZonedDateTime
+  daftDenomination BigDecimal
+  prizesEnabled Boolean
+}
+
+entity CounterDevice {
+  id UUID
+  value	BigDecimal
+  rolloverValue	BigDecimal
+  creditSale BigDecimal
+  manualCounter	Boolean
+  manualMultiplier BigDecimal 
+  decimalsManualCounter	Boolean
+}
+
+
+entity Manufacturer {
+  id Long 
+  code String 
+  name String
+}
+
+entity Formula {
+  id Long  
+  description String
+  expression String
+}
+
+entity Model {
+  id Long 
+  code String required 
+  name String
+  subtractBonus	Boolean
+  collectionCeil BigDecimal
+  rolloverLimit	BigDecimal
+}
+
+entity Interfacing {
+  id Long 
+  isAssigned Boolean
+  ipAddress String
+  hash String
+  serial String 
+  version String 
+  port String
+}
+
+entity Operator {
+  id Long
+  permitDescription String
+  endDate ZonedDateTime
+  startDate	ZonedDateTime
+  minAccumulatedPrize BigDecimal
+  minIndividualPrize BigDecimal
+  minTransactionAccumulated BigDecimal
+  minIndividualTransaction BigDecimal
+  nit String
+  contractNumber String
+  eventQuantity Integer
+  companyName	String
+  municipalityCode String
+  brand String
+}
+
+entity OperationalPropertiesEstablishment {
+  id Long 
+  value String
+  key Integer
+}
+
+enum EstablishmentType {
+  CASINO,
+  RUTA
+}
+
+relationship ManyToOne {
+  EventDevice{idEstablishment required} to Establishment
+  EventDevice{idEventType required} to EventType 
+  DeviceEstablishment{idEstablishment required} to Establishment 
+  CounterEvent{counterCode required} to CounterType 
+  CounterEvent{idEventDevice required} to EventDevice 
+  CounterDevice{counterCode required} to CounterType  
+  CounterDevice{idDevice required} to Device 
+  Model{idManufacturer required} to Manufacturer 
+  Model{idFormula required} to Formula 
+  Interfacing{idEstablishment required} to Establishment 
+  OperationalPropertiesEstablishment{idEstablishment required} to Establishment 
+  Device{idInterfacing required} to Interfacing
+  Device{idModel required} to Model 
+  Device{idDeviceCategory required} to DeviceCategory 
+  Device{idDeviceType required} to DeviceType 
+  Device{idFormulaHandpay} to Formula 
+  Device{idFormulaJackpot} to Formula 
+  Device{idIsland} to Island 
+  Device{idCurrencyType} to CurrencyType 
+  Establishment{idOperator} to Operator
+}
+
+relationship ManyToMany {
+  EventType{idEventType} to Model{idModel}
+}
+
+service all with serviceImpl
+dto all with mapstruct
+paginate all with pagination
+filter all
+
+
+
+

@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="island">
+      <h2 data-cy="islandDetailsHeading"><span jhiTranslate="smolPlusTempApp.island.detail.title">Island</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="smolPlusTempApp.island.id">Id</span></dt>
+        <dd>
+          <span>{{ island.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.island.description">Description</span></dt>
+        <dd>
+          <span>{{ island.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.island.name">Name</span></dt>
+        <dd>
+          <span>{{ island.name }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/island', island.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>
