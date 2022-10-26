@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="department">
+      <h2 data-cy="departmentDetailsHeading"><span jhiTranslate="smolPlusTempApp.department.detail.title">Department</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="smolPlusTempApp.department.id">Id</span></dt>
+        <dd>
+          <span>{{ department.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.department.code">Code</span></dt>
+        <dd>
+          <span>{{ department.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.department.name">Name</span></dt>
+        <dd>
+          <span>{{ department.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.department.daneCode">Dane Code</span></dt>
+        <dd>
+          <span>{{ department.daneCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.department.phoneId">Phone Id</span></dt>
+        <dd>
+          <span>{{ department.phoneId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smolPlusTempApp.department.country">Country</span></dt>
+        <dd>
+          <div *ngIf="department.country">
+            <a [routerLink]="['/country', department.country.id, 'view']">{{ department.country.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/department', department.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

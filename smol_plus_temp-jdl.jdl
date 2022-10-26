@@ -40,35 +40,41 @@ application {
   }
 
 entities EventType, Establishment, EventDevice, DeviceEstablishment, CounterType, CounterEvent, DeviceType, DeviceCategory, Island, CurrencyType, Device,
-  CounterDevice, Manufacturer, Formula, Model, Interfacing, Operator, OperationalPropertiesEstablishment
+  CounterDevice, Manufacturer, Formula, Model, Interfacing, Operator, OperationalPropertiesEstablishment, UserAccess, Municipality, Department, Country 
 }
 
 entity EventType {
   id Long	
-  eventCode String required
-  sasCode String  
-  description String 
+  eventCode String maxlength(20) required
+  sasCode String   maxlength(50)
+  description String maxlength(100)
   isStorable Boolean 
   isPriority Boolean 
-  procesador String  
+  procesador String maxlength(100)
   isAlarm Boolean  	
 }
 
 entity Establishment {
   id Long
   liquidationTime ZonedDateTime
-  name String 
-  type EstablishmentType
-  municipalityCode String   
+  name String maxlength(100) 
+  type EstablishmentType 
   neighborhood String 
   address String 
-  coljuegosCode String 
+  coljuegosCode String maxlength(100)
   closeTime	ZonedDateTime
   startTime	ZonedDateTime
-  activityType String 
+  activityType String maxlength(25)
   longitude Float
   latitude Float 
-  mercantileRegistration String
+  mercantileRegistration String maxlength(100)
+}
+
+entity UserAccess {
+  id Long
+  username String required  maxlength(25)
+  ipAddress String required  maxlength(20)
+  registrationAt ZonedDateTime required
 }
 
 entity EventDevice {
@@ -81,7 +87,7 @@ entity EventDevice {
 entity DeviceEstablishment {
   id UUID	
   registrationAt ZonedDateTime required
-  serial String required
+  serial String required maxlength(50)
   departureAt ZonedDateTime 
   deviceNumber Integer 
   consecutiveDevice Integer
@@ -89,12 +95,12 @@ entity DeviceEstablishment {
 }
 
 entity CounterType { 
-  @Id counterCode String 
-  name String 
-  description String 
+  @Id counterCode String maxlength(2)
+  name String maxlength(50)
+  description String maxlength(100)
   includedInFormula Boolean
   prize Boolean 
-  category String 
+  category String maxlength(100)
   udteWaitTime Integer 
 }
 
@@ -106,46 +112,46 @@ entity CounterEvent {
 
 entity DeviceType {
   id Long
-  description String 
-  name String
+  description String maxlength(100)
+  name String maxlength(50)
 }
 
 entity DeviceCategory {
   id Long
-  description String 
-  name String
+  description String maxlength(100)
+  name String maxlength(50)
 }
 
 entity Island {
   id Long 
-  description String
-  name String
+  description String maxlength(100)
+  name String maxlength(50)
 }
 
 entity CurrencyType {
   id Long  
-  description String
-  name String
+  description String maxlength(100)
+  name String maxlength(50)
   isPriority Boolean
-  location String
+  location String  maxlength(50)
   exchangeRate Float
 }
 
 entity Device {
   id UUID
-  serial String required 
+  serial String maxlength(50) required 
   isProtocolEsdcs Boolean
   numberPlayedReport Integer
   sasDenomination BigDecimal
   isMultigame Boolean
   isMultiDenomination Boolean
   isRetanqueo Boolean
-  state String 
+  state String maxlength(30) 
   theoreticalHold BigDecimal
   sasIdentifier Integer
   creditLimit Long
   hasHooper Boolean
-  coljuegosCode String
+  coljuegosCode String maxlength(50)
   fabricationDate LocalDate
   currentToken BigDecimal
   denominationTito BigDecimal
@@ -159,7 +165,7 @@ entity Device {
   manualGameEvent Boolean
   betCode String
   homologationIndicator Boolean 
-  coljuegosModel String
+  coljuegosModel String maxlength(50)
   reportable Boolean
   aftDenomination BigDecimal
   lastUpdateDate ZonedDateTime
@@ -179,23 +185,22 @@ entity CounterDevice {
   decimalsManualCounter	Boolean
 }
 
-
 entity Manufacturer {
   id Long 
-  code String 
-  name String
+  code String maxlength(50)
+  name String maxlength(50)
 }
 
 entity Formula {
   id Long  
-  description String
-  expression String
+  description String maxlength(100)
+  expression String maxlength(50)
 }
 
 entity Model {
   id Long 
-  code String required 
-  name String
+  code String maxlength(50) required 
+  name String maxlength(50)
   subtractBonus	Boolean
   collectionCeil BigDecimal
   rolloverLimit	BigDecimal
@@ -204,33 +209,32 @@ entity Model {
 entity Interfacing {
   id Long 
   isAssigned Boolean
-  ipAddress String
+  ipAddress String maxlength(25)
   hash String
-  serial String 
-  version String 
+  serial String maxlength(50)
+  version String maxlength(10)
   port String
 }
 
 entity Operator {
   id Long
-  permitDescription String
+  permitDescription String maxlength(50)
   endDate ZonedDateTime
   startDate	ZonedDateTime
   minAccumulatedPrize BigDecimal
   minIndividualPrize BigDecimal
   minTransactionAccumulated BigDecimal
   minIndividualTransaction BigDecimal
-  nit String
-  contractNumber String
+  nit String maxlength(50)
+  contractNumber String maxlength(50)
   eventQuantity Integer
   companyName	String
-  municipalityCode String
-  brand String
+  brand String maxlength(50)
 }
 
 entity OperationalPropertiesEstablishment {
   id Long 
-  value String
+  value String maxlength(50)
   key Integer
 }
 
@@ -239,27 +243,52 @@ enum EstablishmentType {
   RUTA
 }
 
+entity Municipality {
+  id Long
+  code String maxlength(25) // varhcar(25)
+  name String maxlength(50)
+  daneCode String maxlength(25)
+}
+
+entity Department {
+  id Long  
+  code String maxlength(25) 
+  name String maxlength(50)
+  daneCode String maxlength(25)
+  phoneId String maxlength(15)
+}
+
+entity Country {
+  id Long  
+  code String maxlength(25) 
+  name String maxlength(50)
+  identifier String maxlength(20)
+}
+
 relationship ManyToOne {
-  EventDevice{idEstablishment required} to Establishment
-  EventDevice{idEventType required} to EventType 
-  DeviceEstablishment{idEstablishment required} to Establishment 
-  CounterEvent{counterCode required} to CounterType 
-  CounterEvent{idEventDevice required} to EventDevice 
-  CounterDevice{counterCode required} to CounterType  
-  CounterDevice{idDevice required} to Device 
-  Model{idManufacturer required} to Manufacturer 
-  Model{idFormula required} to Formula 
-  Interfacing{idEstablishment required} to Establishment 
-  OperationalPropertiesEstablishment{idEstablishment required} to Establishment 
-  Device{idInterfacing required} to Interfacing
-  Device{idModel required} to Model 
-  Device{idDeviceCategory required} to DeviceCategory 
-  Device{idDeviceType required} to DeviceType 
-  Device{idFormulaHandpay} to Formula 
-  Device{idFormulaJackpot} to Formula 
-  Device{idIsland} to Island 
-  Device{idCurrencyType} to CurrencyType 
-  Establishment{idOperator} to Operator
+  EventDevice{establishment required} to Establishment
+  EventDevice{eventType required} to EventType 
+  DeviceEstablishment{establishment required} to Establishment 
+  CounterEvent{counter required} to CounterType 
+  CounterEvent{eventDevice required} to EventDevice 
+  CounterDevice{counter required} to CounterType  
+  CounterDevice{device required} to Device 
+  Model{manufacturer required} to Manufacturer 
+  Model{formula required} to Formula 
+  Interfacing{establishment required} to Establishment 
+  OperationalPropertiesEstablishment{establishment required} to Establishment 
+  Device{interfacing required} to Interfacing
+  Device{model required} to Model 
+  Device{deviceCategory required} to DeviceCategory 
+  Device{deviceType required} to DeviceType 
+  Device{formulaHandpay} to Formula 
+  Device{formulaJackpot} to Formula 
+  Device{island} to Island 
+  Device{currencyType} to CurrencyType 
+  Establishment{operator} to Operator
+  Operator{municipality} to Municipality
+  Municipality{department} to Department
+  Department{country} to Country
 }
 
 relationship ManyToMany {

@@ -1,0 +1,25 @@
+{
+  "smolPlusTempApp": {
+    "island": {
+      "home": {
+        "title": "Islands",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Island",
+        "createOrEditLabel": "Create or edit a Island",
+        "notFound": "No Islands found"
+      },
+      "created": "A new Island is created with identifier {{ param }}",
+      "updated": "A Island is updated with identifier {{ param }}",
+      "deleted": "A Island is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Island {{ id }}?"
+      },
+      "detail": {
+        "title": "Island"
+      },
+      "id": "Id",
+      "description": "Description",
+      "name": "Name"
+    }
+  }
+}

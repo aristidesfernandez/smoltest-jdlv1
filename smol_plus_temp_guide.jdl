@@ -44,7 +44,7 @@ entities EventType, Establishment, EventDevice, DeviceEstablishment, CounterType
 }
 
 entity EventType {
-	id Integer // (int 2) small serial	
+	id Long // (int 2) small serial	
 	eventCode String required
   sasCode String  
 	description String 
@@ -100,7 +100,7 @@ entity DeviceEstablishment {
 
 
 entity CounterType { 
-  counterCode String required // pk
+  counterCode String maxlength(25) required // pk
   name String 
 	description String 
 	includedInFormula Boolean // se renombra?  --> renombrado
@@ -301,6 +301,30 @@ entity OperationalPropertiesEstablishment {
   value String
   key Integer
   //idEstablishment // fk
+}
+
+entity Municipality {
+  id Integer  // int 2
+  code String maxlength(25) // varhcar(25)
+  name String
+  //departmentCode // fk 
+  daneCode String maxlength(25)
+}
+
+entity Department {
+  id Integer  // int 2
+  code String maxlength(25) // varhcar(25)
+  name String
+  //codigo pais // fk 
+  daneCode String maxlength(25)
+  phoneId 
+}
+
+entity Country {
+  id Integer  // int 2
+  code String maxlength(25) // varhcar(25)
+  name String maxlength(50)
+  identifier String maxlength(20)
 }
 
 service all with serviceImpl

@@ -1,0 +1,30 @@
+{
+  "smolPlusTempApp": {
+    "interfacing": {
+      "home": {
+        "title": "Interfacings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Interfacing",
+        "createOrEditLabel": "Create or edit a Interfacing",
+        "notFound": "No Interfacings found"
+      },
+      "created": "A new Interfacing is created with identifier {{ param }}",
+      "updated": "A Interfacing is updated with identifier {{ param }}",
+      "deleted": "A Interfacing is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Interfacing {{ id }}?"
+      },
+      "detail": {
+        "title": "Interfacing"
+      },
+      "id": "Id",
+      "isAssigned": "Is Assigned",
+      "ipAddress": "Ip Address",
+      "hash": "Hash",
+      "serial": "Serial",
+      "version": "Version",
+      "port": "Port",
+      "establishment": "Establishment"
+    }
+  }
+}
