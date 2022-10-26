@@ -1,1 +1,0 @@
-org.springframework.test.context.ContextCustomizerFactory = co.com.ies.smol.config.TestContainersSpringContextCustomizerFactory
